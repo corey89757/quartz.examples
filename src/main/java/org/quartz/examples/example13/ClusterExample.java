@@ -17,11 +17,6 @@
  
 package org.quartz.examples.example13;
 
-import static org.quartz.DateBuilder.futureDate;
-import static org.quartz.JobBuilder.newJob;
-import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
-import static org.quartz.TriggerBuilder.newTrigger;
-
 import org.quartz.DateBuilder.IntervalUnit;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
@@ -30,6 +25,11 @@ import org.quartz.SimpleTrigger;
 import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static org.quartz.DateBuilder.futureDate;
+import static org.quartz.JobBuilder.newJob;
+import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
+import static org.quartz.TriggerBuilder.newTrigger;
 
 /**
  * Used to test/show the clustering features of JDBCJobStore (JobStoreTX or JobStoreCMT).
@@ -68,7 +68,7 @@ public class ClusterExample {
   public void run(boolean inClearJobs, boolean inScheduleJobs) throws Exception {
 
     // First we must get a reference to a scheduler
-    SchedulerFactory sf = new StdSchedulerFactory();
+    SchedulerFactory sf = new StdSchedulerFactory("quartz-cluster.properties");
     Scheduler sched = sf.getScheduler();
 
     if (inClearJobs) {
